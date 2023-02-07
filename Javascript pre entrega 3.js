@@ -40,12 +40,24 @@ class sistemaEstudiantes {
     }
 
 
-  //Funcion para buscar por DNI. - PENDIENTE MOSTRAR RESULTADO POR ALERT O EN PANTALLA. SOLO FUNCIONA CON CONSOLE LOG
+  //Funcion para buscar por DNI. OK - SE MUESTRA POR ALERT LUEGO PASARLO A JSON
   function buscoPorDocumento(array) {
     let dniIngresado = document.getElementById("dniBuscadoInput")
     let busqueda = array.filter((elemento) => elemento.dni == parseInt(dniIngresado.value));
-    busqueda = JSON.stringify(busqueda)
-    alert(busqueda)}
+    if (busqueda.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No se encontró un resultado para el DNI ingresado'
+      })
+    } else {
+      busqueda = JSON.stringify(busqueda);
+      Swal.fire({
+        text: `${busqueda}`,
+      })
+    }
+}    
+    
 
 
 function verRegistro(array) {
@@ -54,12 +66,12 @@ function verRegistro(array) {
     let nuevoEstudianteDiv = document.createElement("div")
     nuevoEstudianteDiv.className = "col-12 col-md-6 col-lg-4 my-3"
     nuevoEstudianteDiv.innerHTML = `
-          <div id="${estudiante.id}" class="card" style="width: 20rem;">
-                  <h4 class="card-title">Información del estudiante ${estudiante.id}</h4>
-                  <p><strong>Nombre: </strong> ${estudiante.nombre}</p>
-                  <p><strong>Apellido: </strong>${estudiante.apellido}</p>
-                  <p class=""><strong>Documento nro: </strong>${estudiante.dni}</p>
-                  <p class=""><strong>Edad: </strong>${estudiante.edad}</p>
+          <div id="${estudiante.id}" class="card" style="width: 21rem;">
+                  <h4 class="card-title" style = "text-align: center;">Información del estudiante ${estudiante.id}</h4>
+                  <p style = "margin-left: 20px"><strong>Nombre: </strong> ${estudiante.nombre}</p>
+                  <p style = "margin-left: 20px"><strong>Apellido: </strong>${estudiante.apellido}</p>
+                  <p style = "margin-left: 20px" class=""><strong>Documento: </strong>${estudiante.dni}</p>
+                  <p style = "margin-left: 20px" class=""><strong>Edad: </strong>${estudiante.edad}</p>
               </div>
           </div> 
           `
@@ -68,7 +80,7 @@ function verRegistro(array) {
   }
 }
   
-  //Funcion para recorrer array y mostrarlo en consola - OK - NO EN DOM
+  //Funcion para recorrer array y mostrarlo en consola - OK - FUERA DE USO YA QUE HAY OTRA FUNCION QUE LO IMPRIME EN DOM
   function recorroArray(array) {
     array.forEach((element) => {
       console.log(element)
