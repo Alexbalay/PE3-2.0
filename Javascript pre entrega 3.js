@@ -16,6 +16,7 @@ class sistemaEstudiantes {
   let buscarPorDocumento = document.getElementById("buscarDNIBtn")
   let estudiantesDiv = document.getElementById("estudiantes")
   let mostrarRegistro = document.getElementById("btnMostrarRegistro")
+  let btnVaciarRegistro = document.getElementById("btnEliminarRegistro")
 
   //Creo funcion para cargar estudiantes - OK CON DOM
   function registrarEstudiantes(array) {
@@ -38,8 +39,7 @@ class sistemaEstudiantes {
       width: "25%"
     })
     }
-
-
+  
   //Funcion para buscar por DNI. OK - SE MUESTRA POR ALERT LUEGO PASARLO A JSON
   function buscoPorDocumento(array) {
     let dniIngresado = document.getElementById("dniBuscadoInput")
@@ -79,6 +79,13 @@ function verRegistro(array) {
 
   }
 }
+
+//Funcion que vacia todos los datos del registro
+function borroRegistro (){
+          estudiantesDiv.remove()
+
+}
+
   
   //Funcion para recorrer array y mostrarlo en consola - OK - FUERA DE USO YA QUE HAY OTRA FUNCION QUE LO IMPRIME EN DOM
   function recorroArray(array) {
@@ -101,6 +108,7 @@ function verRegistro(array) {
   //---------------------------------------------------HASTA ACÁ FUNCIONES---------------------------------------------------------//
   const estudiantes = [];
 //menu()
+
 guardarEstudiante.addEventListener("click", ()=>{ 
   registrarEstudiantes(estudiantes) 
 })
@@ -110,6 +118,28 @@ buscarPorDocumento.addEventListener("click", ()=>{
 
   mostrarRegistro.addEventListener("click", ()=>{
     verRegistro(estudiantes)
+  })
+
+  btnVaciarRegistro.addEventListener("click", ()=>{
+    Swal.fire({
+      title: '¿Estas seguro/a que deseas vaciar el registro de estudiantes?',
+      text: "Esta accion no puede ser revertida",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Borrado!',
+          'El registro ha sido borrado con exito.',
+          'success',
+          borroRegistro(),
+          verRegistro(estudiantes)
+        )
+      }
+    })
   })
 
   
