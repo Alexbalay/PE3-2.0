@@ -136,7 +136,8 @@ buscarPorDocumento.addEventListener("click", ()=>{
           'El registro ha sido borrado con exito.',
           'success',
           borroRegistro(),
-          verRegistro(estudiantes)
+          verRegistro(estudiantes),
+          localStorage.clear()
         )
       }
     })
