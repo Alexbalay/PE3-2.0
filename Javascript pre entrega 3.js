@@ -83,16 +83,10 @@ function verRegistro(array) {
 //Funcion que vacia todos los datos del registro
 function borroRegistro (){
           estudiantesDiv.remove()
+          localStorage.clear(estudiantes)
 
 }
 
-  
-  //Funcion para recorrer array y mostrarlo en consola - OK - FUERA DE USO YA QUE HAY OTRA FUNCION QUE LO IMPRIME EN DOM
-  function recorroArray(array) {
-    array.forEach((element) => {
-      console.log(element)
-    });
-  }
   // Funcion para eliminar un elemento del array -- OK - NO EN DOM
   function borrarEstudiante(array){
     for(let elem of array){
